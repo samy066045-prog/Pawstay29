@@ -73,3 +73,5 @@ td button{margin:2px}td button.ed,.ed{background:#dce9fb!important;color:#245aa8
   nav a{font-size:12px;padding:5px 9px}
 }
 .chk input+span{white-space:normal;min-width:0}
+input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;min-height:42px;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
