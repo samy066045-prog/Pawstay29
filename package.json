@@ -1,0 +1,25 @@
+{
+  "name": "pawstay",
+  "version": "1.0.0",
+  "description": "PawStay - pet hotel, vet and trainer booking platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 execute pawstay-db --local --file=database/schema.sql && wrangler d1 execute pawstay-db --local --file=database/seed.sql",
+    "db:remote": "wrangler d1 execute pawstay-db --remote --file=database/schema.sql && wrangler d1 execute pawstay-db --remote --file=database/seed.sql"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "hono": "^4.6.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
