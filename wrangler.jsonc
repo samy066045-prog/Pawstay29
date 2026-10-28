@@ -10,6 +10,6 @@
   },
   // D1 = Cloudflare's SQLite database. Paste the id you get from: npx wrangler d1 create pawstay-db
   "d1_databases": [
-    { "binding": "DB", "database_name": "pawstay-db", "database_id": "PASTE_YOUR_DATABASE_ID_HERE" }
+    { "binding": "DB", "database_name": "pawstay-db", "database_id": "ec919a3c-d8ed-4200-8059-95869ebdd9ac" }
   ]
 }
