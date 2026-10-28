@@ -90,3 +90,11 @@ input,select,textarea{min-width:0;max-width:100%}
   .tbl{max-width:100%}
   td,th{white-space:nowrap}
 }
+/* ===== Mobile fixes 2 ===== */
+body{overflow-wrap:anywhere}
+td,th{overflow-wrap:normal}
+.ln,.chk,.tags,.slots{flex-wrap:wrap}
+.chk span{white-space:normal}
+.hero h1,.hero p,.ban h1,.ban p,h2.c,h3{max-width:100%}
+.logo,.logo span{min-width:0}
+.tbl{-webkit-overflow-scrolling:touch}
