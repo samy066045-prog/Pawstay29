@@ -24,7 +24,7 @@ function nav() {
     (user ? (user.role === 'admin' ? a('admin', 'Dashboard') : a('account', 'My Account')) + '<a href="#" onclick="logout();return false">Log out</a>'
       : a('login', 'Log in') + '<a class="btn-sm" href="#/register">Sign up</a>');
 }
-const routes = { '': home, hotel, vets, trainers, login, register, account, admin: () => adminPage('overview') };
+const routes = { '': home, hotel, vets, trainers, about, contact, login, register, account, admin: () => adminPage('overview') };
 async function route() {
   nav(); window.scrollTo(0, 0);
   try { await (routes[location.hash.replace('#/', '')] || home)(); }
@@ -287,3 +287,40 @@ function addCare(bid) {
 async function delCare(id, bid) { try { await api('/care/' + id, 'DELETE'); careModal(bid); } catch (e) { toast(e.message, 1); } }
 
 window.addEventListener('hashchange', route); route();
+
+
+// ---------- About & Contact ----------
+function about() {
+  view(banner('About PawStay', 'One place for your pet\'s stay, health, and training.') + `
+  <section><div class="wrap"><div class="card"><h3>Who we are</h3>
+    <p class="mut">PawStay brings everything your pet needs into one platform. Whether you are travelling and need a safe, comfortable stay, your pet needs to see a trusted vet, or you want a trainer to help with good behavior, you can do it all here.</p></div>
+  <div class="g3">
+    <div class="card"><h3>🏨 Pet Hotel</h3><p class="mut">Comfortable rooms for dogs and cats, with extras like grooming, walking, special feeding, and daily photo updates.</p></div>
+    <div class="card"><h3>🩺 Health</h3><p class="mut">Book appointments with vets and clinics. Some clinics can also keep your pet for treatment or recovery.</p></div>
+    <div class="card"><h3>🎓 Training</h3><p class="mut">Dog and cat trainers who help your pet learn good behavior through one-to-one sessions.</p></div></div>
+  <p style="text-align:center;margin-top:18px"><a class="btn" href="#/contact">Contact us</a></p></div></section>`);
+}
+function contact() {
+  view(banner('Contact us', 'Questions or need help? We would love to hear from you.') + `
+  <section><div class="wrap"><div class="book" style="grid-template-columns:1fr 1fr">
+    <div class="card"><h3>Send us a message</h3>
+      <form onsubmit="return sendContact(event)">
+        <label>Your name<input name="name" required></label>
+        <label>Email<input name="email" type="email" required></label>
+        <label>Message<textarea name="message" required></textarea></label>
+        <button class="btn full">Send message</button>
+      </form></div>
+    <div class="card"><h3>Get in touch</h3>
+      <p>📍 Cairo, Egypt</p>
+      <p>📞 <a href="tel:+201020304055">01020304055</a></p>
+      <p>✉️ <a href="mailto:PawStay@gmail.com">PawStay@gmail.com</a></p>
+      <p class="mut">Open daily, 8:00 AM – 8:00 PM</p></div>
+  </div></div></section>`);
+}
+function sendContact(e) {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  location.href = `mailto:PawStay@gmail.com?subject=${encodeURIComponent('PawStay message from ' + f.name)}&body=${encodeURIComponent(f.message + '\n\n' + f.name + ' (' + f.email + ')')}`;
+  toast('Opening your email app...');
+  return false;
+}
